@@ -1,0 +1,103 @@
+# service 1
+
+This application was generated using JHipster 4.3.0.
+
+## Changes made for Keycloak
+
+- pom.xml: added KeyCloak java adapters:
+  - [spring-boot-adapter](https://keycloak.gitbooks.io/documentation/securing_apps/topics/oidc/java/spring-boot-adapter.html): used to configure the KeyCloak client from application properties rather than from a static file: keycloak.json
+  - [spring-security-adapter](https://keycloak.gitbooks.io/documentation/securing_apps/topics/oidc/java/spring-security-adapter.html): used to configure security constraints programmatically and set Principal and Authorities
+  - keycloak-undertow-adapter: Keycloak container adapter fir embedded Undertow
+- [MicroserviceSecurityConfiguration](src/main/java/com/mycompany/myapp/config/MicroserviceSecurityConfiguration.java): Spring Security configuration for KeyCloak
+- [application-dev.yml](src/main/resources/config/application-dev.yml): KeyCloak config
+- [logback-spring.xml](src/main/resources/logback-spring.xml): `<logger name="org.keycloak.adapters" level="TRACE"/>`
+
+
+For testing purpose, I defined a resource for products at /api/products (see [ProductResource.java](src/main/java/com/mycompany/myapp/web/rest/ProductResource.java))
+
+TODO:
+
+- Configure Feign to call another service
+- Replace KeyCloak spring-security-adapter by spring-security-oauth
+
+
+## Development
+
+To start your application in the dev profile, simply run:
+
+    ./mvnw
+
+
+For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
+
+### Using angular-cli
+
+You can also use [Angular CLI][] to generate some custom client code.
+
+For example, the following command:
+
+    ng generate component my-component
+
+will generate few files:
+
+    create src/main/webapp/app/my-component/my-component.component.html
+    create src/main/webapp/app/my-component/my-component.component.ts
+    update src/main/webapp/app/app.module.ts
+
+## Building for production
+
+To optimize the service1 application for production, run:
+
+    ./mvnw -Pprod clean package
+
+To ensure everything worked, run:
+
+    java -jar target/*.war
+
+
+Refer to [Using JHipster in production][] for more details.
+
+## Testing
+
+To launch your application's tests, run:
+
+    ./mvnw clean test
+
+For more information, refer to the [Running tests page][].
+
+## Using Docker to simplify development (optional)
+
+You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
+For example, to start a postgresql database in a docker container, run:
+
+    docker-compose -f src/main/docker/postgresql.yml up -d
+
+To stop it and remove the container, run:
+
+    docker-compose -f src/main/docker/postgresql.yml down
+
+You can also fully dockerize your application and all the services that it depends on.
+To achieve this, first build a docker image of your app by running:
+
+    ./mvnw package -Pprod docker:build
+
+Then run:
+
+    docker-compose -f src/main/docker/app.yml up -d
+
+For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`yo jhipster:docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
+
+## Continuous Integration (optional)
+
+To configure CI for your project, run the ci-cd sub-generator (`yo jhipster:ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
+
+[JHipster Homepage and latest documentation]: https://jhipster.github.io
+[JHipster 4.3.0 archive]: https://jhipster.github.io/documentation-archive/v4.3.0
+[Doing microservices with JHipster]: https://jhipster.github.io/documentation-archive/v4.3.0/microservices-architecture/
+[Using JHipster in development]: https://jhipster.github.io/documentation-archive/v4.3.0/development/
+[Using Docker and Docker-Compose]: https://jhipster.github.io/documentation-archive/v4.3.0/docker-compose
+[Using JHipster in production]: https://jhipster.github.io/documentation-archive/v4.3.0/production/
+[Running tests page]: https://jhipster.github.io/documentation-archive/v4.3.0/running-tests/
+[Setting up Continuous Integration]: https://jhipster.github.io/documentation-archive/v4.3.0/setting-up-ci/
+
+
