@@ -5,7 +5,7 @@ Run Keycloak using Docker:
 
 Once it boots, you can login using admin/admin on http://localhost:9000/
 
- - [service1] is an example of Jhipster microservice using bearer
+ - [service1](service1) is an example of JHipster microservice using bearer
 
 
 TODO
